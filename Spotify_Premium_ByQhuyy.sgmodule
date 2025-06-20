@@ -1,0 +1,13 @@
+[General]
+skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local
+dns-server = 94.140.14.14, 94.140.15.15
+skip-cert-verify = true
+
+[Script]
+SpotifyJson = type=http-request, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/, script-path=https://raw.githubusercontent.com/quocchienn/YouTube_Spotify/refs/heads/module/spotify-json.js, max-size=-1, timeout=300
+
+SpotifyProto = type=http-response, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$, script-path=https://raw.githubusercontent.com/quocchienn/YouTube_Spotify/refs/heads/module/spotify-proto.js, requires-body=true, binary-body-mode=true, max-size=-1, timeout=300
+
+[MITM]
+hostname = %APPEND% spclient.wg.spotify.com
+enable = true
